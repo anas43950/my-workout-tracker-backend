@@ -4,10 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Routine extends Model
 {
+
+    protected $fillable = [
+        'day',      
+    ];
     public function workouts()
     {
-        return $this->hasMany(Workout::class);
+        return $this->belongsToMany(Workout::class);
     }
 }
