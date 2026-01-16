@@ -15,6 +15,7 @@ class RoutineResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'name' => $this->name,
             'day' => $this->day,
             'workouts' => WorkoutResource::collection($this->whenLoaded('workouts'))
         ];

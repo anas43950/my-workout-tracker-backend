@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreWorkoutRequest;
 use App\Http\Resources\WorkoutResource;
+use App\Models\WorkoutSet;
 use Illuminate\Http\Request;
 
 class WorkoutController extends Controller
@@ -17,8 +18,12 @@ class WorkoutController extends Controller
     public function store(StoreWorkoutRequest $request)
     {
         $attr = $request->validated();
-        return new WorkoutResource($request->user()->workouts()->create([
+        $workout = $request->user()->workouts()->create([
             'name' => $attr['name']
-        ]));
+        ]);
+        foreach ($attr['sets'] as $item) {
+            $workout->sets()->create($item);
+        }
+        return new WorkoutResource($workout->load('sets'));
     }
 }

@@ -10,6 +10,7 @@ class Routine extends Model
 
     protected $fillable = [
         'day',      
+        'name',
     ];
     public function workouts()
     {

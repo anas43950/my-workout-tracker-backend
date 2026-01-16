@@ -30,14 +30,11 @@ class StoreWorkoutRequest extends FormRequest
                         fn($query) =>
                         $query->where('user_id', $this->user()->id)
                     ),
-            ]
+            ],
+            'sets' => ['required', 'array'],
+            'sets.*.reps' => ['required', 'integer'],
+            'sets.*.weight' => ['required', 'integer'],
         ];
     }
 
-    public function messages()
-    {
-        return [
-            'name.unique' => 'You\'ve already added a workout with this name.'
-        ];
-    }
 }

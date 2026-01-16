@@ -14,4 +14,9 @@ class Workout extends Model
     {
         return $this->hasMany(WorkoutRecord::class);
     }
+
+    public function sets()
+    {
+        return $this->hasMany(WorkoutSet::class);
+    }
 }

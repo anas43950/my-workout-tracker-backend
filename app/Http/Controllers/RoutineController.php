@@ -6,6 +6,7 @@ use App\Http\Requests\IndexRoutineRequest;
 use App\Http\Requests\StoreRoutineRequest;
 use App\Http\Resources\RoutineResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\ItemNotFoundException;
 
 use function PHPUnit\Framework\isEmpty;
@@ -31,9 +32,11 @@ class RoutineController extends Controller
     }
     public function store(StoreRoutineRequest $request)
     {
+        
         $routine = $request->user()->routines()->create([
-            'day' => $request->day
-        ]);
+            'name' => $request->validated()['name'],
+            'day' => $request->validated()['day'],
+            ]);
         $workouts_ids = $request['workouts_ids'];
         foreach ($workouts_ids as $id) {
             $routine->workouts()->attach($id);

@@ -1,5 +1,6 @@
 <?php
 
+use App\Constants;
 use App\Models\User;
 use App\Models\Workout;
 use Illuminate\Database\Migrations\Migration;
@@ -15,7 +16,6 @@ return new class extends Migration
     {
         Schema::create('workout_records', function (Blueprint $table) {
             $table->id();
-            $table->string('day');
             $table->foreignIdFor(Workout::class);
             $table->foreignIdFor(User::class);
             $table->timestamps();

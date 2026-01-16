@@ -17,6 +17,7 @@ class WorkoutResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'sets' => WorkoutSetResource::collection($this->whenLoaded('sets'))
         ];
     }
 }

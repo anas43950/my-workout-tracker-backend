@@ -24,6 +24,7 @@ class StoreRoutineRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
+            'name' => ['required', 'string'],
             'day' => [
                 'required',
                 'string',
@@ -49,16 +50,5 @@ class StoreRoutineRequest extends FormRequest
             ]
         ];
         return $rules;
-    }
-
-    public function messages()
-    {
-        return [
-            'day.required' => 'Please select a day for this routine',
-            'day.unique' => 'Routine already added for this day',
-            'workouts_ids.required' => 'Please select workouts for this routine',
-            'workouts_ids.*.integer' => 'Every workout ID must be an integer',
-            'workouts_ids.*.exists' => 'No workout found for the given workout ID'
-        ];
     }
 }

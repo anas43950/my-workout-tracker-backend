@@ -27,11 +27,4 @@ class IndexRoutineRequest extends FormRequest
             'day' => ['required', Rule::in(Constants::WEEKDAYS)]
         ];
     }
-
-    public function messages()
-    {
-        return [
-            'day.in' => 'Enter a valid day from weekdays'
-        ];
-    }
 }

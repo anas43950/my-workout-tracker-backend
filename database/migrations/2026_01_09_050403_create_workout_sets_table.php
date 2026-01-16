@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Workout;
 use App\Models\WorkoutRecord;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -16,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->integer('reps');
             $table->integer('weight');
-            $table->foreignIdFor(WorkoutRecord::class);
+            $table->foreignIdFor(WorkoutRecord::class)->nullable();
+            $table->foreignIdFor(Workout::class)->nullable();
             $table->timestamps();
         });
     }
