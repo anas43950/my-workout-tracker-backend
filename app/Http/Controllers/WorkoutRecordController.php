@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\IndexWorkoutRecordRequest;
+use App\Http\Requests\IndexForDayWorkoutRecordRequest;
 use App\Http\Requests\StoreWorkoutRecordRequest;
 use App\Http\Resources\WorkoutRecordResource;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class WorkoutRecordController extends Controller
@@ -14,9 +15,23 @@ class WorkoutRecordController extends Controller
         return WorkoutRecordResource::collection($request->user()->workoutRecords->load('sets'));
     }
 
-    public function recordsForDay(IndexWorkoutRecordRequest $request)
+    public function recordsForDay(IndexForDayWorkoutRecordRequest $request)
     {
-        return WorkoutRecordResource::collection($request->user()->workoutRecords->load('sets'));
+        $date = $request['created_at'];
+        $start = Carbon::parse($date)
+            ->startOfDay();
+
+        $end = Carbon::parse($date)
+            ->endOfDay();
+
+        $records = $request->user()
+            ->workoutRecords()
+            ->whereBetween("created_at", [$start, $end])
+            ->with('workout')
+            ->with('sets')
+            ->get();
+
+        return WorkoutRecordResource::collection($records);
     }
     public function store(StoreWorkoutRecordRequest $request)
     {

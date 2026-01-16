@@ -5,16 +5,8 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class IndexWorkoutRecordRequest extends FormRequest
+class IndexForDayWorkoutRecordRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return $this->user() != null;
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -23,7 +15,14 @@ class IndexWorkoutRecordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'created_at' => [Rule::date()]
+            'created_at' => ['required', Rule::date()]
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'created_at.required' => '\'created_at\' field is required'
         ];
     }
 }
