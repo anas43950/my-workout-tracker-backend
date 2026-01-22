@@ -18,12 +18,7 @@ class WorkoutController extends Controller
     public function store(StoreWorkoutRequest $request)
     {
         $attr = $request->validated();
-        $workout = $request->user()->workouts()->create([
-            'name' => $attr['name']
-        ]);
-        foreach ($attr['sets'] as $item) {
-            $workout->sets()->create($item);
-        }
-        return new WorkoutResource($workout->load('sets'));
+        $workout = $request->user()->workouts()->create($attr);
+        return new WorkoutResource($workout);
     }
 }

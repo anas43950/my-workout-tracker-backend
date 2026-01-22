@@ -23,9 +23,9 @@ class StoreWorkoutRequest extends FormRequest
                         $query->where('user_id', $this->user()->id)
                     ),
             ],
-            'sets' => ['required', 'array'],
-            'sets.*.reps' => ['required', 'integer'],
-            'sets.*.weight' => ['required', 'integer'],
+            'sets' => ['required', 'integer'],
+            'rep_range_from' => ['required', 'integer'],
+            'rep_range_to' => ['required', 'integer'],
         ];
     }
 

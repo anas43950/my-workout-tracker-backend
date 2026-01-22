@@ -18,7 +18,6 @@ return new class extends Migration
             $table->integer('reps');
             $table->integer('weight');
             $table->foreignIdFor(WorkoutRecord::class)->nullable();
-            $table->foreignIdFor(Workout::class)->nullable();
             $table->timestamps();
         });
     }
