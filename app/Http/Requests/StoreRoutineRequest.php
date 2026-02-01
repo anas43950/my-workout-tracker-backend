@@ -17,16 +17,14 @@ class StoreRoutineRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'name' => ['required', 'string'],
-            'day' => [
+            'name' => [
                 'required',
                 'string',
-                Rule::in(Constants::WEEKDAYS),
                 Rule::unique('routines')
                     ->where(
                         fn($query) =>
                         $query->where('user_id', $this->user()->id)
-                    ),
+                    )
             ],
             'workouts_ids' => [
                 'required',

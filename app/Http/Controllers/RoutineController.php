@@ -22,10 +22,10 @@ class RoutineController extends Controller
         }
         return RoutineResource::collection($routines->load('workouts'));
     }
-    public function routineForDay(IndexRoutineRequest $request)
+    public function routineWithName(IndexRoutineRequest $request)
     {
         try {
-            return new RoutineResource($request->user()->routines->where('day', $request->day)->firstOrFail()->load('workouts'));
+            return new RoutineResource($request->user()->routines->where('name', $request->name)->firstOrFail()->load('workouts'));
         } catch (ItemNotFoundException $e) {
             return response(['message' => 'No routine found for this day'], 404);
         }

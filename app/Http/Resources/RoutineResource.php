@@ -16,7 +16,6 @@ class RoutineResource extends JsonResource
     {
         return [
             'name' => $this->name,
-            'day' => $this->day,
             'workouts' => WorkoutResource::collection($this->whenLoaded('workouts'))
         ];
     }

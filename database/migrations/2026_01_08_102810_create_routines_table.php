@@ -16,9 +16,8 @@ return new class extends Migration
         Schema::create('routines', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('day',Constants::WEEKDAYS);
             $table->foreignIdFor(User::class);
-            $table->unique(['user_id', 'day']);
+            $table->unique(['user_id', 'name']);
             $table->timestamps();
         });
     }

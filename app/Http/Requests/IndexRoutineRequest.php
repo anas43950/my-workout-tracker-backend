@@ -17,7 +17,7 @@ class IndexRoutineRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'day' => ['required', Rule::in(Constants::WEEKDAYS)]
+            'name' => ['required', Rule::exists('routines')]
         ];
     }
 }

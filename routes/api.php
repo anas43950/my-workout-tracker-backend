@@ -20,11 +20,13 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::group(['prefix' => 'workouts'], function () {
         Route::get('/', [WorkoutController::class, 'index']);
         Route::post('/add', [WorkoutController::class, 'store']);
+        Route::post('/edit', [WorkoutController::class, 'edit']);
+        Route::delete('/delete/{id}', [WorkoutController::class, 'destroy']);
     });
 
     Route::group(['prefix' => 'routine'], function () {
         Route::get('/', [RoutineController::class, 'index']);
-        Route::get('/for-day', [RoutineController::class, 'routineForDay']);
+        Route::get('/with-name', [RoutineController::class, 'routineWithName']);
         Route::post('/add', [RoutineController::class, 'store']);
     });
 
