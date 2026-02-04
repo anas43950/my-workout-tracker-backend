@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('routines', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->unique(['user_id', 'name']);
             $table->timestamps();
         });

@@ -24,13 +24,15 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::delete('/delete/{id}', [WorkoutController::class, 'destroy']);
     });
 
-    Route::group(['prefix' => 'routine'], function () {
+    Route::group(['prefix' => 'routines'], function () {
         Route::get('/', [RoutineController::class, 'index']);
         Route::get('/with-name', [RoutineController::class, 'routineWithName']);
         Route::post('/add', [RoutineController::class, 'store']);
+        Route::post('/edit', [RoutineController::class, 'edit']);
+        Route::post('/delete/{id}', [RoutineController::class, 'destroy']);
     });
 
-    Route::group(['prefix' => 'workout-record'], function () {
+    Route::group(['prefix' => 'workout-records'], function () {
         Route::get('/', [WorkoutRecordController::class, 'index']);
         Route::get('/for-day', [WorkoutRecordController::class, 'recordsForDay']);
         Route::post('/add', [WorkoutRecordController::class, 'store']);
