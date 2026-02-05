@@ -20,9 +20,6 @@ class RoutineController extends Controller
     {
         $routines = $request->user()->routines;
 
-        if ($routines && count($routines) == 0) {
-            return response(['message' => 'No routines found for the user'], 404);
-        }
         return RoutineResource::collection($routines->load('workouts'));
     }
     public function routineWithName(IndexRoutineRequest $request)

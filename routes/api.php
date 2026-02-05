@@ -29,7 +29,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::get('/with-name', [RoutineController::class, 'routineWithName']);
         Route::post('/add', [RoutineController::class, 'store']);
         Route::post('/edit', [RoutineController::class, 'edit']);
-        Route::post('/delete/{id}', [RoutineController::class, 'destroy']);
+        Route::delete('/delete/{id}', [RoutineController::class, 'destroy']);
     });
 
     Route::group(['prefix' => 'workout-records'], function () {
