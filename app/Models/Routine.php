@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Routine extends Model
 {
@@ -12,8 +12,8 @@ class Routine extends Model
         'day',
         'name',
     ];
-    public function positionedWorkouts()
+    public function positionedWorkouts(): HasMany
     {
-        return $this->hasMany(RoutinePositionedWorkout::class);
+        return $this->hasMany(RoutinePositionedWorkout::class)->orderBy(('index'));
     }
 }

@@ -20,7 +20,7 @@ class RoutineController extends Controller
     {
         $routines = $request->user()->routines;
 
-        return RoutineResource::collection($routines->load('workouts'));
+        return RoutineResource::collection($routines->load(['positionedWorkouts']));
     }
     public function routineWithName(IndexRoutineRequest $request)
     {
@@ -38,8 +38,13 @@ class RoutineController extends Controller
             'name' => $attr['name']
         ]);
 
-        $routine->positionedWorkouts()->createMany($attr['positioned_workouts_ids']);
-        return new RoutineResource($routine->load(['positionedWorkouts', 'positionedWorkouts.workout']));
+        foreach ($attr['workouts_ids'] as $key => $value) {
+            $routine->positionedWorkouts()->create([
+                'index' => $key,
+                'workout_id' => $value,
+            ]);
+        }
+        return new RoutineResource($routine->load(['positionedWorkouts']));
     }
 
     public function edit(UpdateRoutineRequest $request)
@@ -51,9 +56,14 @@ class RoutineController extends Controller
         ]);
 
         $routine->positionedWorkouts()->delete();
-        $routine->positionedWorkouts()->createMany($attr['positioned_workouts_ids']);
+        foreach ($attr['workouts_ids'] as $key => $value) {
+            $routine->positionedWorkouts()->create([
+                'index' => $key,
+                'workout_id' => $value,
+            ]);
+        }
 
-        return new RoutineResource($routine->load(['positionedWorkouts', 'positionedWorkouts.workout']));
+        return new RoutineResource($routine->load(['positionedWorkouts']));
     }
 
 
