@@ -15,7 +15,15 @@ class UpdateRoutineRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'id' => ['required', Rule::exists('routines')],
+            'id' => [
+                'required',
+                Rule::exists('routines')
+                    ->where(
+                        fn($query) =>
+                        $query
+                            ->where('user_id', $this->user()->id)
+                    )
+            ],
             'name' => [
                 'sometimes',
                 'string',

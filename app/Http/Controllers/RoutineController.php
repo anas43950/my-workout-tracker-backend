@@ -20,7 +20,7 @@ class RoutineController extends Controller
     {
         $routines = $request->user()->routines;
 
-        return RoutineResource::collection($routines->load(['positionedWorkouts']));
+        return RoutineResource::collection($routines->load(['positionedWorkouts', 'positionedWorkouts.workout']));
     }
     public function routineWithName(IndexRoutineRequest $request)
     {
@@ -44,7 +44,7 @@ class RoutineController extends Controller
                 'workout_id' => $value,
             ]);
         }
-        return new RoutineResource($routine->load(['positionedWorkouts']));
+        return new RoutineResource($routine->load(['positionedWorkouts', 'positionedWorkouts.workout']));
     }
 
     public function edit(UpdateRoutineRequest $request)
@@ -63,7 +63,7 @@ class RoutineController extends Controller
             ]);
         }
 
-        return new RoutineResource($routine->load(['positionedWorkouts']));
+        return new RoutineResource($routine->load(['positionedWorkouts', 'positionedWorkouts.workout']));
     }
 
 
