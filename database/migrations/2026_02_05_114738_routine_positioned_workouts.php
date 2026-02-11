@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('routine_workout', function (Blueprint $table) {
+        Schema::create('routine_positioned_workouts', function (Blueprint $table) {
             $table->id();
+            $table->integer('index');
             $table->foreignIdFor(Routine::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Workout::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('routine_workout');
+        //
     }
 };

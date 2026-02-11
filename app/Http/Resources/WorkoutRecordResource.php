@@ -20,6 +20,7 @@ class WorkoutRecordResource extends JsonResource
         return [
             'workout' => new WorkoutResource($this->workout),
             'sets' => WorkoutSetResource::collection($this->sets),
+            'note' => $this->note,
             'created_date' => $this->created_at,
         ];
     }

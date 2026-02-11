@@ -18,6 +18,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Workout::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(User::class);
+            $table->string('note');
             $table->timestamps();
         });
     }

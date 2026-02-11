@@ -8,6 +8,7 @@ class WorkoutRecord extends Model
 {
     protected $fillable = [
         'workout_id',
+        'note',
     ];
 
     public function sets()

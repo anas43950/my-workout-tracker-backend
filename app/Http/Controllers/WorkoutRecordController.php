@@ -36,7 +36,9 @@ class WorkoutRecordController extends Controller
     public function store(StoreWorkoutRecordRequest $request)
     {
         $attr = $request->validated();
-        $record = $request->user()->workoutRecords()->create(['workout_id' => $attr['workout_id']]);
+        $record = $request->user()->workoutRecords()->create(
+            $request->only(['workout_id', 'note'])
+        );
 
 
         foreach ($attr['sets'] as $item) {

@@ -38,8 +38,8 @@ class RoutineController extends Controller
             'name' => $attr['name']
         ]);
 
-        $routine->workouts()->attach($attr['workouts_ids']);
-        return new RoutineResource($routine->load('workouts'));
+        $routine->positionedWorkouts()->createMany($attr['positioned_workouts_ids']);
+        return new RoutineResource($routine->load(['positionedWorkouts', 'positionedWorkouts.workout']));
     }
 
     public function edit(UpdateRoutineRequest $request)
@@ -50,10 +50,10 @@ class RoutineController extends Controller
             'name' => $request->get('name', $routine->name)
         ]);
 
-        $workouts_ids = $attr['workouts_ids'];
-        $routine->workouts()->sync($workouts_ids);
+        $routine->positionedWorkouts()->delete();
+        $routine->positionedWorkouts()->createMany($attr['positioned_workouts_ids']);
 
-        return new RoutineResource($routine->load('workouts'));
+        return new RoutineResource($routine->load(['positionedWorkouts', 'positionedWorkouts.workout']));
     }
 
 

@@ -16,7 +16,8 @@ class WorkoutSetResource extends JsonResource
     {
         return [
             'reps' => $this->reps,
-            'weight' => $this->weight
+            'weight' => $this->weight,
+            'is_drop_set' => $this->is_drop_set == 1 ? true : false
         ];
     }
 }

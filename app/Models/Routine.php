@@ -9,11 +9,11 @@ class Routine extends Model
 {
 
     protected $fillable = [
-        'day',      
+        'day',
         'name',
     ];
-    public function workouts()
+    public function positionedWorkouts()
     {
-        return $this->belongsToMany(Workout::class);
+        return $this->hasMany(RoutinePositionedWorkout::class);
     }
 }

@@ -14,10 +14,11 @@ class RoutineResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'workouts' => WorkoutResource::collection($this->whenLoaded('workouts'))
+            'positioned_workouts' => RoutinePositionedWorkoutResource::collection($this->whenLoaded('positionedWorkouts'))
         ];
     }
 }
