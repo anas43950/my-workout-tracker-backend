@@ -26,7 +26,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::group(['prefix' => 'routines'], function () {
         Route::get('/', [RoutineController::class, 'index']);
-        Route::get('/with-name', [RoutineController::class, 'routineWithName']);
+        Route::get('/by-name', [RoutineController::class, 'routineByName']);
         Route::post('/add', [RoutineController::class, 'store']);
         Route::post('/edit', [RoutineController::class, 'edit']);
         Route::delete('/delete/{id}', [RoutineController::class, 'destroy']);

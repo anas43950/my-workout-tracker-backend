@@ -20,7 +20,8 @@ class StoreWorkoutRecordRequest extends FormRequest
             'sets' => ['required', 'array'],
             'sets.*.reps' => ['required', 'integer'],
             'sets.*.weight' => ['required', 'integer'],
-            'sets.*.is_drop_set' => ['sometimes', 'boolean:strict'],
+            'sets.*.drop_set_reps' => ['required_with:sets.*.drop_set_weight', 'integer'],
+            'sets.*.drop_set_weight' => ['required_with:sets.*.drop_set_reps', 'integer'],
         ];
     }
 }

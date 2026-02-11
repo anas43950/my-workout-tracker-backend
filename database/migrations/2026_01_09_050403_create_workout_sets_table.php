@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->integer('reps');
             $table->integer('weight');
-            $table->boolean('is_drop_set')->default(0);
+            $table->integer('drop_set_reps')->nullable();
+            $table->integer('drop_set_weight')->nullable();
             $table->foreignIdFor(WorkoutRecord::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

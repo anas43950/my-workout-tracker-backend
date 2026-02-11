@@ -9,6 +9,7 @@ class WorkoutSet extends Model
  protected $fillable = [
         'reps',
         'weight',
-        'is_drop_set',
+        'drop_set_reps',
+        'drop_set_weight',
     ];
 }

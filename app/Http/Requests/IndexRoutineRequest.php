@@ -17,7 +17,15 @@ class IndexRoutineRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', Rule::exists('routines')]
+            'name' => [
+                'required',
+                Rule::exists('routines')
+                    ->where(
+                        fn($query) =>
+                        $query
+                            ->where('user_id', $this->user()->id)
+                    )
+            ]
         ];
     }
 }
