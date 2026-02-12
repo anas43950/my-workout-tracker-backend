@@ -25,9 +25,9 @@ class RoutineController extends Controller
     public function routineByName(IndexRoutineRequest $request)
     {
         try {
-            return new RoutineResource($request->user()->routines->where('name', $request->name)->firstOrFail()->load(['positionedWorkouts', 'positionedWorkouts.workout']));
+            return new RoutineResource($request->user()->routines()->where('name', $request->name)->firstOrFail()->load(['positionedWorkouts', 'positionedWorkouts.workout']));
         } catch (ItemNotFoundException $e) {
-            return response(['message' => 'No routine found for this day'], 404);
+            return response(['message' => 'No routine found with this name'], 404);
         }
     }
     public function store(StoreRoutineRequest $request)
@@ -50,7 +50,7 @@ class RoutineController extends Controller
     public function edit(UpdateRoutineRequest $request)
     {
         $attr = $request->validated();
-        $routine = Routine::where('id', $attr['id'])->first();
+        $routine = $request->user()->routines()->find($attr['id']);
         $routine->update([
             'name' => $request->get('name', $routine->name)
         ]);
@@ -70,7 +70,7 @@ class RoutineController extends Controller
     public function destroy(string $id)
     {
         try {
-            $routine = Routine::findOrFail($id);
+            $routine = request()->user()->routines()->findOrFail($id);
             $routine->delete();
             return response()->json(null);
         } catch (Throwable $th) {
