@@ -4,7 +4,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RoutineController;
 use App\Http\Controllers\WorkoutController;
-use App\Http\Controllers\WorkoutRecordController;
+use App\Http\Controllers\WorkoutHistoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,9 +32,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::delete('/delete/{id}', [RoutineController::class, 'destroy']);
     });
 
-    Route::group(['prefix' => 'workout-records'], function () {
-        Route::get('/', [WorkoutRecordController::class, 'index']);
-        Route::get('/for-day', [WorkoutRecordController::class, 'recordsForDay']);
-        Route::post('/add', [WorkoutRecordController::class, 'store']);
+    Route::group(['prefix' => 'workout-history'], function () {
+        Route::get('/', [WorkoutHistoryController::class, 'index']);
+        Route::get('/for-day', [WorkoutHistoryController::class, 'historyForDay']);
+        Route::post('/add', [WorkoutHistoryController::class, 'store']);
     });
 });

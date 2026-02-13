@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class WorkoutSet extends Model
+class WorkoutHistorySet extends Model
 {
- protected $fillable = [
+    protected $fillable = [
         'reps',
         'weight',
         'drop_set_reps',
         'drop_set_weight',
     ];
+
+    public $timestamps = false;
 }

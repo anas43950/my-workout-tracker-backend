@@ -58,8 +58,8 @@ class User extends Authenticatable
         return $this->hasMany(Routine::class);
     }
 
-    public function workoutRecords()
+    public function workoutHistory(): HasMany
     {
-        return $this->hasMany(WorkoutRecord::class);
+        return $this->hasMany(WorkoutHistory::class);
     }
 }

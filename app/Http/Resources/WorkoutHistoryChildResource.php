@@ -2,13 +2,10 @@
 
 namespace App\Http\Resources;
 
-use Carbon\Carbon;
-use DateTime;
-use DateTimeZone;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class WorkoutRecordResource extends JsonResource
+class WorkoutHistoryChildResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,10 +15,8 @@ class WorkoutRecordResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'workout' => new WorkoutResource($this->workout),
-            'sets' => WorkoutSetResource::collection($this->sets),
-            'note' => $this->note,
-            'created_date' => $this->created_at,
+            'workout' => new WorkoutResource($this->whenLoaded('workout')),
+            'sets' => WorkoutHistorySetResource::collection($this->whenLoaded('sets'))
         ];
     }
 }

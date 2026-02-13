@@ -6,7 +6,7 @@ use App\Http\Requests\StoreWorkoutRequest;
 use App\Http\Requests\UpdateWorkoutRequest;
 use App\Http\Resources\WorkoutResource;
 use App\Models\Workout;
-use App\Models\WorkoutRecord;
+use App\Models\WorkoutHistory;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Throwable;

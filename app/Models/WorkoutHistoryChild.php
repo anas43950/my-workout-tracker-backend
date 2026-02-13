@@ -4,18 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class WorkoutRecord extends Model
+class WorkoutHistoryChild extends Model
 {
     protected $fillable = [
         'workout_id',
-        'note',
     ];
 
     public function sets()
     {
-        return $this->hasMany(WorkoutSet::class);
+        return $this->hasMany(WorkoutHistorySet::class);
     }
-
     public function workout()
     {
         return $this->belongsTo(Workout::class);

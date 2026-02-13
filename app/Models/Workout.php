@@ -13,8 +13,8 @@ class Workout extends Model
         'rep_range_from',
         'rep_range_to',
     ];
-    public function workoutRecords()
+    public function history()
     {
-        return $this->hasMany(WorkoutRecord::class);
+        return $this->hasMany(WorkoutHistoryChild::class);
     }
 }
