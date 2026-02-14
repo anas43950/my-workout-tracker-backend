@@ -48,9 +48,9 @@ class User extends Authenticatable
         ];
     }
 
-    public function workouts(): HasMany
+    public function exercises(): HasMany
     {
-        return $this->hasMany(Workout::class);
+        return $this->hasMany(Exercise::class);
     }
 
     public function routines(): HasMany
@@ -58,8 +58,8 @@ class User extends Authenticatable
         return $this->hasMany(Routine::class);
     }
 
-    public function workoutHistory(): HasMany
+    public function workouts(): HasMany
     {
-        return $this->hasMany(WorkoutHistory::class);
+        return $this->hasMany(Workout::class);
     }
 }

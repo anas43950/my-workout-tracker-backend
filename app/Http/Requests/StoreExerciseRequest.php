@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateWorkoutRequest extends FormRequest
+class StoreExerciseRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -15,19 +15,18 @@ class UpdateWorkoutRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => ['required', Rule::exists('workouts', 'id')],
             'name' => [
-                Rule::unique('workouts')
+                'required',
+                Rule::unique('exercises')
                     ->where(
                         fn($query) =>
-                        $query
-                            ->where('user_id', $this->user()->id)
-                            ->where('id', '!=', $this->id)
+                        $query->where('user_id', $this->user()->id)
                     ),
             ],
-            'sets' => ['integer'],
-            'rep_range_from' => ['integer'],
-            'rep_range_to' => ['integer'],
+            'sets' => ['required', 'integer'],
+            'rep_range_from' => ['required', 'integer'],
+            'rep_range_to' => ['required', 'integer'],
         ];
     }
+
 }

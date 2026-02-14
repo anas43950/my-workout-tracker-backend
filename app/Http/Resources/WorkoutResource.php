@@ -2,6 +2,9 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
+use DateTime;
+use DateTimeZone;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -15,11 +18,9 @@ class WorkoutResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'sets' => $this->sets,
-            'rep_range_from' => $this->rep_range_from,
-            'rep_range_to' => $this->rep_range_to,
+            'note' => $this->note,
+            'created_date' => $this->created_at,
+            'logs' => WorkoutChildResource::collection($this->whenLoaded('children')),
         ];
     }
 }

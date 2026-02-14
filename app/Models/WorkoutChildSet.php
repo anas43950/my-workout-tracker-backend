@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class WorkoutHistorySet extends Model
+class WorkoutChildSet extends Model
 {
     protected $fillable = [
         'reps',

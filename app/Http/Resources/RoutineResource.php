@@ -18,10 +18,10 @@ class RoutineResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'workouts' => WorkoutResource::collection($this->whenLoaded(
-                'positionedWorkouts',
-                $this->positionedWorkouts->map(function($pWorkout){
-                    return $pWorkout->workout;
+            'exercises' => ExerciseResource::collection($this->whenLoaded(
+                'positionedExercises',
+                $this->positionedExercises->map(function($pExercise){
+                    return $pExercise->exercise;
                 })
             ))
         ];

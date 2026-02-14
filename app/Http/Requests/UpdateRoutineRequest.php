@@ -35,13 +35,13 @@ class UpdateRoutineRequest extends FormRequest
                             ->where('id', '!=', $this->id)
                     )
             ],
-            'workouts_ids' => [
+            'exercises_ids' => [
                 'required',
                 'array'
             ],
-            'workouts_ids.*' => [
+            'exercises_ids.*' => [
                 'integer',
-                Rule::exists('workouts', 'id')
+                Rule::exists('exercises', 'id')
                     ->where(
                         fn($query) =>
                         $query->where('user_id', $this->user()->id)

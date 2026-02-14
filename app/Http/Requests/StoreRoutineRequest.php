@@ -27,13 +27,13 @@ class StoreRoutineRequest extends FormRequest
                     )
             ],
             
-            'workouts_ids' => [
+            'exercises_ids' => [
                 'required',
                 'array'
             ],
-            'workouts_ids.*' => [
+            'exercises_ids.*' => [
                 'integer',
-                Rule::exists('workouts', 'id')
+                Rule::exists('exercises', 'id')
                     ->where(
                         fn($query) =>
                         $query->where('user_id', $this->user()->id)

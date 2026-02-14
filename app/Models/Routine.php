@@ -12,8 +12,8 @@ class Routine extends Model
         'day',
         'name',
     ];
-    public function positionedWorkouts(): HasMany
+    public function positionedExercises(): HasMany
     {
-        return $this->hasMany(RoutinePositionedWorkout::class)->orderBy(('index'));
+        return $this->hasMany(RoutinePositionedExercise::class)->orderBy(('index'));
     }
 }

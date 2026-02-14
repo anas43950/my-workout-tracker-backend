@@ -2,7 +2,7 @@
 
 use App\Constants;
 use App\Models\User;
-use App\Models\Workout;
+use App\Models\Exercise;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,7 +14,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('workout_histories', function (Blueprint $table) {
+        Schema::create('workouts', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class);
             $table->string('note');
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('workout_histories');
+        Schema::dropIfExists('workouts');
     }
 };

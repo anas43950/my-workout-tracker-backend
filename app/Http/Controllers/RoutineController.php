@@ -20,12 +20,12 @@ class RoutineController extends Controller
     {
         $routines = $request->user()->routines;
 
-        return RoutineResource::collection($routines->load(['positionedWorkouts', 'positionedWorkouts.workout']));
+        return RoutineResource::collection($routines->load(['positionedExercises', 'positionedExercises.exercise']));
     }
     public function routineByName(IndexRoutineRequest $request)
     {
         try {
-            return new RoutineResource($request->user()->routines()->where('name', $request->name)->firstOrFail()->load(['positionedWorkouts', 'positionedWorkouts.workout']));
+            return new RoutineResource($request->user()->routines()->where('name', $request->name)->firstOrFail()->load(['positionedExercises', 'positionedExercises.exercise']));
         } catch (ItemNotFoundException $e) {
             return response(['message' => 'No routine found with this name'], 404);
         }
@@ -38,13 +38,13 @@ class RoutineController extends Controller
             'name' => $attr['name']
         ]);
 
-        foreach ($attr['workouts_ids'] as $key => $value) {
-            $routine->positionedWorkouts()->create([
+        foreach ($attr['exercises_ids'] as $key => $value) {
+            $routine->positionedExercises()->create([
                 'index' => $key,
-                'workout_id' => $value,
+                'exercise_id' => $value,
             ]);
         }
-        return new RoutineResource($routine->load(['positionedWorkouts', 'positionedWorkouts.workout']));
+        return new RoutineResource($routine->load(['positionedExercises', 'positionedExercises.exercise']));
     }
 
     public function edit(UpdateRoutineRequest $request)
@@ -55,15 +55,15 @@ class RoutineController extends Controller
             'name' => $request->get('name', $routine->name)
         ]);
 
-        $routine->positionedWorkouts()->delete();
-        foreach ($attr['workouts_ids'] as $key => $value) {
-            $routine->positionedWorkouts()->create([
+        $routine->positionedExercises()->delete();
+        foreach ($attr['exercises_ids'] as $key => $value) {
+            $routine->positionedExercises()->create([
                 'index' => $key,
-                'workout_id' => $value,
+                'exercise_id' => $value,
             ]);
         }
 
-        return new RoutineResource($routine->load(['positionedWorkouts', 'positionedWorkouts.workout']));
+        return new RoutineResource($routine->load(['positionedExercises', 'positionedExercises.exercise']));
     }
 
 

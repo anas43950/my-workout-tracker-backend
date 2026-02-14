@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class RoutinePositionedWorkoutResource extends JsonResource
+class RoutinePositionedExerciseResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,7 +16,7 @@ class RoutinePositionedWorkoutResource extends JsonResource
     {
         return [
             'index' => $this->index,
-            'workout' => new WorkoutResource($this->whenLoaded('workout'))
+            'exercise' => new ExerciseResource($this->whenLoaded('exercise'))
         ];
     }
 }

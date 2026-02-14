@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Workout;
-use App\Models\WorkoutHistory;
+use App\Models\Routine;
+use App\Models\Exercise;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('workout_history_children', function (Blueprint $table) {
+        Schema::create('routine_positioned_exercises', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(WorkoutHistory::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Workout::class)->constrained()->cascadeOnDelete();
+            $table->integer('index');
+            $table->foreignIdFor(Routine::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Exercise::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('workout_history_children');
+        Schema::dropIfExists('routine_positioned_exercises');
     }
 };
