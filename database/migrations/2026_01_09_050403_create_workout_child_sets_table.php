@@ -15,9 +15,9 @@ return new class extends Migration
         Schema::create('workout_child_sets', function (Blueprint $table) {
             $table->id();
             $table->integer('reps');
-            $table->integer('weight');
+            $table->decimal('weight', 8, 3);
             $table->integer('drop_set_reps')->nullable();
-            $table->integer('drop_set_weight')->nullable();
+            $table->decimal('drop_set_weight', 8, 3)->nullable();
             $table->foreignIdFor(WorkoutChild::class)->constrained()->cascadeOnDelete();
         });
     }

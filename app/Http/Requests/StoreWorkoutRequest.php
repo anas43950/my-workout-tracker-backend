@@ -16,13 +16,21 @@ class StoreWorkoutRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
+            'note' => ['sometimes'],
+            'routine_id' => [
+                'required', 
+                Rule::exists('routines', 'id')
+                    ->where(
+                        fn($query) =>
+                        $query->where('user_id', $this->user()->id)
+                    )
+                ],
             'logs.*.exercise_id' => ['required', 'exists:exercises,id'],
             'logs.*.sets' => ['required', 'array'],
             'logs.*.sets.*.reps' => ['required', 'integer'],
-            'logs.*.sets.*.weight' => ['required', 'integer'],
+            'logs.*.sets.*.weight' => ['required', 'numeric'],
             'logs.*.sets.*.drop_set_reps' => ['required_with:logs.*.sets.*.drop_set_weight', 'integer'],
-            'logs.*.sets.*.drop_set_weight' => ['required_with:logs.*.sets.*.drop_set_reps', 'integer'],
-            'note' => ['sometimes']
+            'logs.*.sets.*.drop_set_weight' => ['required_with:logs.*.sets.*.drop_set_reps', 'numeric'],
         ];
 
         return $rules;

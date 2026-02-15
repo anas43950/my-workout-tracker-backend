@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\IndexForDayWorkoutsRequest;
+use App\Http\Requests\IndexForRoutineWorkoutsRequest;
 use App\Http\Requests\StoreWorkoutRequest;
 use App\Http\Resources\WorkoutResource;
 use Carbon\Carbon;
@@ -15,23 +15,21 @@ class WorkoutsController extends Controller
         return WorkoutResource::collection($request->user()->workouts()->with(['children', 'children.sets', 'children.exercise'])->get());
     }
 
-    public function workoutsForDay(IndexForDayWorkoutsRequest $request)
+    public function workoutsForRoutine(IndexForRoutineWorkoutsRequest $request)
     {
-        $date = Carbon::parse($request['created_at']);
-
-        $workout = $request->user()
+        $workouts = $request->user()
             ->workouts()
-            ->whereDate("created_at", $date)
+            ->where('routine_id', $request->routine_id)
             ->with(['children', 'children.sets', 'children.exercise'])
             ->get();
 
-        return WorkoutResource::collection($workout);
+        return WorkoutResource::collection($workouts);
     }
     public function store(StoreWorkoutRequest $request)
     {
         $attr = $request->validated();
         $workoutRecord = $request->user()->workouts()->create(
-            $request->only(['note'])
+            $request->only(['note', 'routine_id'])
         );
 
         foreach ($attr['logs'] as $value) {

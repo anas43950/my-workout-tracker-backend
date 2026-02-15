@@ -9,6 +9,7 @@ class Workout extends Model
 {
     protected $fillable = [
         'note',
+        'routine_id',
     ];
 
     public function children(): HasMany
