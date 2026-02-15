@@ -35,6 +35,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::group(['prefix' => 'workouts'], function () {
         Route::get('/', [WorkoutsController::class, 'index']);
         Route::get('/for-routine', [WorkoutsController::class, 'workoutsForRoutine']);
+        Route::get('/for-date', [WorkoutsController::class, 'workoutsForDate']);
         Route::post('/add', [WorkoutsController::class, 'store']);
     });
 });

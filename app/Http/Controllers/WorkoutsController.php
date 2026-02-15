@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\IndexForDateWorkoutsRequest;
 use App\Http\Requests\IndexForRoutineWorkoutsRequest;
 use App\Http\Requests\StoreWorkoutRequest;
 use App\Http\Resources\WorkoutResource;
@@ -13,6 +14,19 @@ class WorkoutsController extends Controller
     public function index(Request $request)
     {
         return WorkoutResource::collection($request->user()->workouts()->with(['children', 'children.sets', 'children.exercise'])->get());
+    }
+
+    public function workoutsForDate(IndexForDateWorkoutsRequest $request)
+    {
+        $date = Carbon::parse($request['date']);
+
+        $workout = $request->user()
+            ->workouts()
+            ->whereDay("created_at", $date)
+            ->with(['children', 'children.sets', 'children.exercise'])
+            ->get();
+
+        return WorkoutResource::collection($workout);
     }
 
     public function workoutsForRoutine(IndexForRoutineWorkoutsRequest $request)
