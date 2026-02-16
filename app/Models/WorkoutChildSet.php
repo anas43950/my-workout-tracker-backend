@@ -14,4 +14,9 @@ class WorkoutChildSet extends Model
     ];
 
     public $timestamps = false;
+
+    protected $casts = [
+        'weight' => 'float',
+        'drop_set_weight' => 'float',
+    ];
 }

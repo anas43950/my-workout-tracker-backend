@@ -19,7 +19,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Routine::class);
-            $table->string('note');
+            $table->string('note')->nullable();
             $table->timestamps();
         });
     }

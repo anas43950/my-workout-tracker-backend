@@ -18,8 +18,10 @@ class WorkoutResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
+            'routine_id' => $this->routine_id,
             'note' => $this->note,
-            'created_date' => $this->created_at,
+            'created_at' => $this->created_at,
             'logs' => WorkoutChildResource::collection($this->whenLoaded('children')),
         ];
     }

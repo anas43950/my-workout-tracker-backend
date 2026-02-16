@@ -13,7 +13,12 @@ class WorkoutsController extends Controller
 {
     public function index(Request $request)
     {
-        return WorkoutResource::collection($request->user()->workouts()->with(['children', 'children.sets', 'children.exercise'])->get());
+        return WorkoutResource::collection(
+            $request->user()->workouts()
+                ->orderByDesc('created_at')
+                ->with(['children', 'children.sets', 'children.exercise'])
+                ->get()
+        );
     }
 
     public function workoutsForDate(IndexForDateWorkoutsRequest $request)
@@ -50,8 +55,10 @@ class WorkoutsController extends Controller
             $child = $workoutRecord->children()->create([
                 'exercise_id' => $value['exercise_id']
             ]);
-            $child->sets()->createMany($value['sets']);
+
+            $child->sets()->createMany($value['sets'] ?? []);
         }
+        $workoutRecord->refresh();
         return new WorkoutResource($workoutRecord->load(['children', 'children.sets', 'children.exercise']));
     }
 }
