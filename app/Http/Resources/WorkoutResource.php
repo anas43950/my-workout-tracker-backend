@@ -21,6 +21,7 @@ class WorkoutResource extends JsonResource
             'id' => $this->id,
             'routine_id' => $this->routine_id,
             'note' => $this->note,
+            'started_at' => $this->started_at,
             'created_at' => $this->created_at,
             'logs' => WorkoutChildResource::collection($this->whenLoaded('children')),
         ];

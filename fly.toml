@@ -36,3 +36,4 @@ console_command = 'php /var/www/html/artisan tinker'
   memory = '1gb'
   cpus = 1
   memory_mb = 1024
+

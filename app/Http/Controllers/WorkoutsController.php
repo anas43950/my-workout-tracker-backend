@@ -48,7 +48,11 @@ class WorkoutsController extends Controller
     {
         $attr = $request->validated();
         $workoutRecord = $request->user()->workouts()->create(
-            $request->only(['note', 'routine_id'])
+            [
+                'routine_id' => $request->routine_id,
+                'note' => $request->note,
+                'started_at' => $request->has('started_at') ? Carbon::parse($request->started_at)->utc()->toIso8601String() : null,
+            ]
         );
 
         foreach ($attr['logs'] as $value) {

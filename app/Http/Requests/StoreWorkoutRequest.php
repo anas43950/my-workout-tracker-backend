@@ -25,6 +25,7 @@ class StoreWorkoutRequest extends FormRequest
                         $query->where('user_id', $this->user()->id)
                     )
                 ],
+            'started_at' => ['sometimes', 'date'],
             'logs.*.exercise_id' => ['required', 'exists:exercises,id'],
             'logs.*.sets' => ['required', 'array'],
             'logs.*.sets.*.reps' => ['required', 'integer'],
