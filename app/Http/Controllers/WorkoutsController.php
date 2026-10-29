@@ -27,7 +27,7 @@ class WorkoutsController extends Controller
 
         $workout = $request->user()
             ->workouts()
-            ->whereDay("created_at", $date)
+            ->whereDate('created_at', $date)
             ->with(['children', 'children.sets', 'children.exercise'])
             ->get();
 
@@ -57,7 +57,7 @@ class WorkoutsController extends Controller
 
         foreach ($attr['logs'] as $value) {
             $child = $workoutRecord->children()->create([
-                'exercise_id' => $value['exercise_id']
+                'exercise_id' => $value['exercise_id'],
             ]);
 
             $child->sets()->createMany($value['sets'] ?? []);
